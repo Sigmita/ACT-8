@@ -1,0 +1,33 @@
+{% extends 'gestion/base.html' %}
+
+{% block title %}Interacciones de Ticket{% endblock %}
+
+{% block content %}
+    <h2>Interacciones</h2>
+    <a href="{% url 'interaccion_create' %}" class="btn btn-primary mb-3">Añadir Interacción</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Ticket</th>
+                <th>Agente</th>
+                <th>Descripción</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for interaccion in object_list %}
+                <tr>
+                    <td>{{ interaccion.ticket.asunto }}</td>
+                    <td>{{ interaccion.agente.nombre }} {{ interaccion.agente.apellido }}</td>
+                    <td>{{ interaccion.descripcion }}</td>
+                    <td>{{ interaccion.fecha_interaccion }}</td>
+                    <td>
+                        <a href="{% url 'interaccion_update' interaccion.pk %}" class="btn btn-sm btn-warning">Editar</a>
+                        <a href="{% url 'interaccion_delete' interaccion.pk %}" class="btn btn-sm btn-danger">Borrar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

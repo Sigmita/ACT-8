@@ -1,0 +1,33 @@
+{% extends "gestion/base.html" %}
+
+{% block title %}Encuestas de Satisfacción{% endblock %}
+
+{% block content %}
+<h2>Encuestas de Satisfacción</h2>
+<a href="{% url 'satisfaccion_cliente_create' %}" class="btn btn-primary mb-3">Crear Encuesta</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID Ticket</th>
+            <th>Fecha Encuesta</th>
+            <th>Calificación Agente</th>
+            <th>Calificación Resolución</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for object in object_list %}
+        <tr>
+            <td>{{ object.ticket.id_ticket }}</td>
+            <td>{{ object.fecha_encuesta }}</td>
+            <td>{{ object.calificacion_agente }}</td>
+            <td>{{ object.calificacion_resolucion }}</td>
+            <td>
+                <a href="{% url 'satisfaccion_cliente_update' object.pk %}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="{% url 'satisfaccion_cliente_delete' object.pk %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

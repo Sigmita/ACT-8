@@ -1,0 +1,31 @@
+{% extends 'gestion/base.html' %}
+
+{% block title %}Agentes de Soporte{% endblock %}
+
+{% block content %}
+    <h2>Agentes</h2>
+    <a href="{% url 'agente_create' %}" class="btn btn-primary mb-3">Añadir Agente</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Especialidad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for agente in object_list %}
+                <tr>
+                    <td>{{ agente.nombre }} {{ agente.apellido }}</td>
+                    <td>{{ agente.email }}</td>
+                    <td>{{ agente.especialidad }}</td>
+                    <td>
+                        <a href="{% url 'agente_update' agente.pk %}" class="btn btn-sm btn-warning">Editar</a>
+                        <a href="{% url 'agente_delete' agente.pk %}" class="btn btn-sm btn-danger">Borrar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'gestion/base.html' %}
+
+{% block title %}SLAs{% endblock %}
+
+{% block content %}
+    <h2>SLAs</h2>
+    <a href="{% url 'sla_create' %}" class="btn btn-primary mb-3">Añadir SLA</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Tiempo de Respuesta (h)</th>
+                <th>Tiempo de Resolución (h)</th>
+                <th>Prioridad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sla in object_list %}
+                <tr>
+                    <td>{{ sla.nombre_sla }}</td>
+                    <td>{{ sla.tiempo_respuesta_horas }}</td>
+                    <td>{{ sla.tiempo_resolucion_horas }}</td>
+                    <td>{{ sla.prioridad_asociada }}</td>
+                    <td>
+                        <a href="{% url 'sla_update' sla.pk %}" class="btn btn-sm btn-warning">Editar</a>
+                        <a href="{% url 'sla_delete' sla.pk %}" class="btn btn-sm btn-danger">Borrar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

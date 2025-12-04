@@ -1,0 +1,31 @@
+{% extends 'gestion/base.html' %}
+
+{% block title %}Clientes de Soporte{% endblock %}
+
+{% block content %}
+    <h2>Clientes</h2>
+    <a href="{% url 'cliente_create' %}" class="btn btn-primary mb-3">Añadir Cliente</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Empresa</th>
+                <th>Contacto</th>
+                <th>Email</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in object_list %}
+                <tr>
+                    <td>{{ cliente.nombre_empresa }}</td>
+                    <td>{{ cliente.contacto_principal }}</td>
+                    <td>{{ cliente.email_contacto }}</td>
+                    <td>
+                        <a href="{% url 'cliente_update' cliente.pk %}" class="btn btn-sm btn-warning">Editar</a>
+                        <a href="{% url 'cliente_delete' cliente.pk %}" class="btn btn-sm btn-danger">Borrar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
